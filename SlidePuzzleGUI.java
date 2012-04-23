@@ -21,7 +21,7 @@ public class SlidePuzzleGUI extends JPanel {
         controlPanel.add(newGameButton);
 
         //--- Create graphics panel
-        _puzzleGraphics = new GraphicsPanel(3,2);
+        _puzzleGraphics = new GraphicsPanel(2,2);
 
         //--- Set the layout and add the components
         this.setLayout(new BorderLayout());

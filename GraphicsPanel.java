@@ -10,7 +10,7 @@ import javax.swing.event.*;
  *
  * @author lolapriego
  */
-  class GraphicsPanel extends JPanel implements MouseListener {
+  public class GraphicsPanel extends JPanel implements MouseListener {
         private int rows;
         private int cols;
 
