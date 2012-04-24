@@ -1,6 +1,8 @@
+package controller;
+
 
 import javax.swing.JFrame;
-
+import view.SlidePuzzleGUI;
 
 /*
  * To change this template, choose Tools | Templates
@@ -8,7 +10,7 @@ import javax.swing.JFrame;
  */
 
 /*
- * NewJFrame.java
+ * FramePartida.java
  *
  * Created on Apr 22, 2012, 4:10:01 PM
  */
@@ -17,9 +19,9 @@ import javax.swing.JFrame;
  *
  * @author lolapriego
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class FramePartida extends javax.swing.JFrame {
 
-    /*public NewJFrame() {
+    /*public FramePartida() {
         initComponents();
     }
      *
