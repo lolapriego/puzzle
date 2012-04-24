@@ -157,10 +157,10 @@ public class Partida
              this.puzzle=p;
             }
          else{
-         this.padre.setPadre(this.padre);
+         this.setPadre(this.padre);//modificado
          System.out.println("Estoy en mete puzzle");
-         System.out.println(this.padre.getPadre().getPuzzle());
-         this.padre.setPuzzle(this.puzzle);
+         System.out.println(this.getPadre().getPuzzle());
+         this.padre.setPuzzle(this.puzzle);//modificado
          this.puzzle=p;
     }
 }
