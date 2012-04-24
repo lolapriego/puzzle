@@ -1,4 +1,4 @@
-package jigsaw;
+package model;
 
 
 /**
@@ -28,6 +28,8 @@ public class Partida
      * Constructor por defecto
      */
     public Partida(){
+        this.puzzle = null;
+        this.padre = null;
     }
     
     

@@ -1,4 +1,5 @@
-package jigsaw;
+package model;
+
 
 
 /**
