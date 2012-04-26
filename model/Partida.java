@@ -13,6 +13,7 @@ public class Partida
     private List<Puzzle> jugadas = new ArrayList<Puzzle>();
     private Set<Puzzle> historial = new HashSet <Puzzle>();
     private Puzzle jugadaInicial;
+    private ArrayList<Puzzle> traza = new ArrayList<Puzzle>();
 
     /**
      * Constructor for objects of class Partida
@@ -120,18 +121,24 @@ public class Partida
        this.jugadas.add(p);
     }
 
+    public ArrayList<Puzzle> getTraza(){
+        return this.traza;
+    }
+
     public boolean partidaResuelta(){
-        if(getUltimaJugada().hashCode() == this.jugadaInicial.resuelto().hashCode()) {
+        Puzzle aux = getUltimaJugada();
+        traza.add(aux);
+        if(aux.hashCode() == this.jugadaInicial.resuelto().hashCode()) {
         return true;
         }
 
-        historial.add(getUltimaJugada());
+        historial.add(aux);
         Set <Puzzle> movimientos= new HashSet<Puzzle>();
 
-        movimientos.add(getUltimaJugada().moverAbajo());
-        movimientos.add(getUltimaJugada().moverDerecha());
-        movimientos.add(getUltimaJugada().moverArriba());
-        movimientos.add(getUltimaJugada().moverIz());
+        movimientos.add(aux.moverAbajo());
+        movimientos.add(aux.moverDerecha());
+        movimientos.add(aux.moverArriba());
+        movimientos.add(aux.moverIz());
 
         boolean flag = false;
         for(Puzzle pz: movimientos){
