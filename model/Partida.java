@@ -1,5 +1,6 @@
 package model;
 
+import java.util.*;
 
 /**
  * Construye una jugada de puzzle
@@ -9,8 +10,9 @@ package model;
  */
 public class Partida
 {
-    private Puzzle puzzle;
-    private Partida padre;
+    private List<Puzzle> jugadas = new ArrayList<Puzzle>();
+    private Set<Puzzle> historial = new HashSet <Puzzle>();
+    private Puzzle jugadaInicial;
 
     /**
      * Constructor for objects of class Partida
@@ -18,70 +20,34 @@ public class Partida
      * @param Puzzle recibe la �ltima jugada de la partida
      * @param Partida recibe las jugadas anteriores
      */
-    public Partida(Puzzle puzzle, Partida partida)
+    public Partida(Puzzle puzzle)
     {
-     this.puzzle= puzzle;
-     this.padre= partida;
+        jugadas.add(puzzle);
+        this.jugadaInicial = puzzle;
     }
     
     /**
      * Constructor por defecto
      */
     public Partida(){
-        this.puzzle = null;
-        this.padre = null;
     }
     
-    
-
-    /**
-     * Getter del atributo padre (partidas o jugadas anteriores)
-     * 
-     * @return Partida las jugadas anteriores a la actual
-     */
-    public Partida getPadre()
-    {
-       return padre;
-    }
-    
-    /**
-     * Setter de partidas anteriores
-     * 
-     * @param recibe jugadas anteriores
-     */
-    
-    public void setPadre(Partida padre){
-    this.padre=padre;
-    }
         
     /**
      * Getter del atributo puzzle (jugada actual)
      * 
      * @return Puzzle 
      */
-    public Puzzle getPuzzle()
+    public Puzzle getUltimaJugada()
     {
-       return this.puzzle;
+       return this.jugadas.get(this.jugadas.size() -1);
     }
     
-     /**
-     *Setter del atributo puzzle (jugada actual)
-     * 
-     * @param Puzzle jugada actual
-     */
-    public void setPuzzle(Puzzle puzzle){
-    this.puzzle=puzzle;
-    }
+
     
-    public int getProfundidad(){
-        return getNumeroNodos() -1;
+    public int getNumPartidas(){
+        return this.jugadas.size();
     }
-    
-    private int getNumeroNodos(){
-        if(padre==null) return 0;
-        return padre.getNumeroNodos() +1;
-    }
-    
     
      /**
      * toString nos permite una secuencia de las jugadas de la partida 
@@ -91,16 +57,13 @@ public class Partida
      */
     @Override
     public String toString(){
-        try{
-        if(this.padre.getPuzzle()==null){
-            System.out.println("estoy aqui");
-            return this.puzzle.toString();
-            }
-        return this.padre.toString() + this.puzzle.toString();
+        String aux= "";
+        if(this.jugadas.size() == 0)
+            aux += "No se ha inicializado ninguna partida";
+        for (int i=0; i< this.jugadas.size(); i ++){
+            aux += this.jugadas.get(i).toString();
         }
-        catch (NullPointerException e){
-            return "";
-        }
+        return aux;
 
     }
     
@@ -116,9 +79,10 @@ public class Partida
     public boolean equals(Object o){
         if((o==null) || !(o instanceof Partida)) return false;
         Partida aux = (Partida) o;
-        if(aux.puzzle.equals(this.puzzle) && aux.padre.equals(this.padre))
-        return true;
-        else return false;
+        boolean flag = true;
+        for (int i=0; i< this.jugadas.size(); i ++){
+        }
+        return flag;
     }
     
     /**
@@ -129,21 +93,21 @@ public class Partida
      */
     @Override
     public int hashCode(){
-        int hc=0;
-        if(padre!=null)
-        hc=3*hc +padre.hashCode();
-        if(puzzle!=null)
-        hc= 3*hc + puzzle.hashCode();
-        return hc;
+      //  int hc=0;
+     //   if(padre!=null)
+      //  hc=3*hc +padre.hashCode();
+      //  if(puzzle!=null)
+      //  hc= 3*hc + puzzle.hashCode();
+      //  return hc;
+        return 1;
     }
     
     
     /**Borra la �ltima jugada de la partida
      * 
      */
-    public void saca(){
-        this.puzzle= this.padre.getPuzzle();
-        this.padre = this.padre.getPadre();
+    public Puzzle deshacerMov(){
+        return this.jugadas.remove(this.jugadas.size() -1);
     }
     
      /**A�ade una jugada a la partida
@@ -151,19 +115,37 @@ public class Partida
      * @param Puzzle jugada actual a a�adir a la partida
      */
     public void mete(Puzzle p){
-        if(this.padre==null && this.puzzle ==null)this.puzzle=p;
-         if(this.puzzle!=null&&this.padre==null) {
-             this.padre= new Partida(this.puzzle, null);
-             this.puzzle=p;
-            }
-         else{
-         this.setPadre(this.padre);//modificado
-         System.out.println("Estoy en mete puzzle");
-         System.out.println(this.getPadre().getPuzzle());
-         this.padre.setPuzzle(this.puzzle);//modificado
-         this.puzzle=p;
+       if(this.jugadas.size() == 0)
+           this.jugadaInicial = p;
+       this.jugadas.add(p);
     }
-}
-    
+
+    public boolean partidaResuelta(){
+        if(getUltimaJugada().hashCode() == this.jugadaInicial.resuelto().hashCode()) {
+        return true;
+        }
+
+        historial.add(getUltimaJugada());
+        Set <Puzzle> movimientos= new HashSet<Puzzle>();
+
+        movimientos.add(getUltimaJugada().moverAbajo());
+        movimientos.add(getUltimaJugada().moverDerecha());
+        movimientos.add(getUltimaJugada().moverArriba());
+        movimientos.add(getUltimaJugada().moverIz());
+
+        boolean flag = false;
+        for(Puzzle pz: movimientos){
+            if(!historial.contains(pz)){
+            mete(pz);
+            flag = partidaResuelta();
+            }
+         }
+         if(!flag){
+             deshacerMov();
+             return false;
+         }
+         else return true;
+    }//function
+ 
    
 }

@@ -55,7 +55,7 @@ public class Puzzle
      * 
      * @return cadena de caracteres que forma el puzzle
      */
-    public String getPuzzle(){
+    private String getPuzzle(){
     return this.secuencia;
     }
     
@@ -80,14 +80,22 @@ public class Puzzle
     * @throws MoveException si intenta desplazar el espacio en BLANCO y estaba en la fila de arriba
     * @throws Exception si hay incongruencia al devolver el puzzle
     */
-    public Puzzle  moverArriba() throws Exception{
+    public Puzzle  moverArriba() {
         int posBlanc =this.secuencia.indexOf(BLANCO);
-        if(posBlanc<this.col) throw new MoveException("No se puede realizar ese movimiento, int�nte otro movimiento diferente");
+        if(posBlanc<this.col) {
+            return this;
+        }
         char [] aux=this.secuencia.toCharArray();
         char almacen;
         aux[posBlanc]=aux[posBlanc-col];
         aux[posBlanc-col]=BLANCO;
-        return new Puzzle(String.copyValueOf(aux),this.row,this.col);
+
+        try{
+        return new Puzzle(String.copyValueOf(aux), this.row, this.col);
+        }
+        catch (Exception e){
+            return this;
+        }
     }
     
     /**
@@ -100,14 +108,22 @@ public class Puzzle
     * @throws MoveException si intenta desplazar el espacio en BLANCO y estaba en la fila de abajo
     * @throws Exception si hay incongruencia al devolver el puzzle
     */
-    public Puzzle moverAbajo ()throws Exception{
+    public Puzzle moverAbajo (){
         int posBlanc =this.secuencia.indexOf(BLANCO);
-        if(posBlanc>=this.col*(this.row-1)) throw new MoveException("No se puede realizar ese movimiento, int�nte otro movimiento diferente");
+        if(posBlanc>=this.col*(this.row-1)){
+            return this;
+        }
         char [] aux=this.secuencia.toCharArray();
         char almacen;
         aux[posBlanc]=aux[posBlanc+col];
         aux[posBlanc+col]=BLANCO;
-        return new Puzzle(String.copyValueOf(aux),this.row,this.col);
+        try{
+        return new Puzzle(String.copyValueOf(aux), this.row, this.col);
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return this;
+        }
     }
     
     
@@ -121,15 +137,21 @@ public class Puzzle
     * @throws MoveException si intenta desplazar el espacio en BLANCO y estaba en la fila de la derecha
     * @throws Exception si hay incongruencia al devolver el puzzle
     */
-    public Puzzle moverDerecha() throws Exception{
+    public Puzzle moverDerecha() {
         int posBlanc =this.secuencia.indexOf(BLANCO);
-        if((posBlanc+1)%this.col==0) 
-        throw new MoveException("No se puede realizar ese movimiento, int�nte otro movimiento diferente");
+        if((posBlanc+1)%this.col==0){
+            return this;
+        }
         char [] aux=this.secuencia.toCharArray();
         char almacen;
         aux[posBlanc]=aux[posBlanc+1];
         aux[posBlanc+1]=BLANCO;
-        return new Puzzle(String.copyValueOf(aux),this.row,this.col);
+        try{
+        return new Puzzle(String.copyValueOf(aux), this.row, this.col);
+        }
+        catch (Exception e){
+            return this;
+        }
     }
     
     /**
@@ -142,15 +164,23 @@ public class Puzzle
     * @throws MoveException si intenta desplazar el espacio en BLANCO y estaba en la fila de la izda
     * @throws Exception si hay incongruencia al devolver el puzzle
     */
-    public Puzzle moverIz() throws Exception{
+    public Puzzle moverIz() {
         int posBlanc =this.secuencia.indexOf(BLANCO);
-        if(posBlanc%this.col==0) throw new MoveException("No se puede realizar ese movimiento, intente otro movimiento diferente");
+        if(posBlanc%this.col==0){
+            return this;
+        }
         char [] aux=this.secuencia.toCharArray();
         char almacen;
         aux[posBlanc]=aux[posBlanc-1];
         aux[posBlanc-1]=BLANCO;
-        return new Puzzle(String.copyValueOf(aux),this.row,this.col);
+        try{
+        return new Puzzle(String.copyValueOf(aux), this.row, this.col);
+        }
+        catch (Exception e){
+            return this;
+        }
     }
+
 
      /**
      * toString nos permite ver el puzzle
@@ -160,13 +190,15 @@ public class Puzzle
      */
     @Override
     public String toString(){
-            String devuelto='\n' + "" ;
-     for(int i=0; i<row; i++){
-      devuelto += '\n' + "----------------" +'\n';
-         for(int j=0;j<col; j++)
-         devuelto += " " + this.secuencia.charAt(i*col+j) + "|";
-     }
-     return devuelto;
+        String devuelto='\n' + "" ;
+
+        for(int i=0; i<row; i++){
+            devuelto += '\n' + "----------------" +'\n';
+            for(int j=0;j<col; j++)
+                devuelto += " " + this.secuencia.charAt(i*col+j) + "|";
+        }
+
+        return devuelto;
     }
      
     
@@ -206,7 +238,7 @@ public class Puzzle
      * @throws Exception si hubo un error al crear el puzzle resuelto
      * 
      */
-    public Puzzle resuelto() throws Exception{//algoritmo de la burbuja, ordenar un array
+    public Puzzle resuelto(){//algoritmo de la burbuja, ordenar un array
         char almacen;
         boolean flag= false;
         char aux []= this.secuencia.toCharArray();
@@ -227,9 +259,13 @@ public class Puzzle
         aux[i]=aux[i+1];
         aux[aux.length-1]=BLANCO;
         
-                
-        return new Puzzle(String.copyValueOf(aux), this.row, this.col);
-       
+        try{
+            return new Puzzle(String.copyValueOf(aux), this.row, this.col);
+        }
+        catch (Exception e){
+            return this;
+        }
+
         
     }
 

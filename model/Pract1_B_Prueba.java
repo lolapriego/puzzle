@@ -18,12 +18,12 @@ import java.util.Scanner;
 public class Pract1_B_Prueba
 {
     public static void main(String [] args){
-        Scanner lector= new Scanner(System.in);
+       Scanner lector= new Scanner(System.in);
        int contador=0;
        Puzzle puzzle = leerPuzzle(contador);
        contador++;
        char opcion;
-       Partida partida= new Partida(puzzle, null);
+       Partida partida= new Partida(puzzle);
        System.out.println("Empieza la partida");
            do{
             System.out.println("Decida que funciones desea probar sobre este puzzle");
@@ -36,57 +36,42 @@ public class Pract1_B_Prueba
             System.out.println("7) Rendirse ver jugada ganadora");
             System.out.println("8) Leer otro puzzle");
             System.out.println("9) Salir del programa");
-            opcion=lector.next().charAt(0);
+            opcion = lector.next().charAt(0);
+            System.out.println("ok");
             switch (opcion){
-                case '1':  try{ 
-                    partida.mete(partida.getPuzzle().moverArriba());
+                case '1':  
+                    partida.mete(partida.getUltimaJugada().moverArriba());
                      System.out.println(partida);
-                 } 
-                 catch (Exception e){ 
-                     System.out.println(e);
-                    }
+
                 break;
-                case '2': try{ 
-                    partida.mete(partida.getPuzzle().moverAbajo());
+                case '2':  
+                    partida.mete(partida.getUltimaJugada().moverAbajo());
                     System.out.println(partida);
-                 } 
-                 catch (Exception e){ 
-                     System.out.println(e);
-                    }
+
                 break;
-                case '3':try{ 
-                    partida.mete(partida.getPuzzle().moverDerecha());
+                case '3':
+                    partida.mete(partida.getUltimaJugada().moverDerecha());
                      System.out.println(partida);
-                 } 
-                 catch (Exception e){ 
-                     System.out.println(e);
-                    }
-                break;
-                case '4': try{ 
-                    partida.mete(partida.getPuzzle().moverIz());
-                     System.out.println(partida);
-                 } 
-                 catch (Exception e){ 
-                     System.out.println(e);
-                    }
-                break;
-                case '5':try{
-                    System.out.println(partida.getPuzzle().resuelto());
-                }
-                catch(Exception e){
-                    System.out.println(e);
-                }
-                break;
-                case '6': partida.saca();
+                    break;
+                case '4':
+                    partida.mete(partida.getUltimaJugada().moverIz());
+                    System.out.println(partida);
+                    break;
+                case '5':
+                    System.out.println(partida.getUltimaJugada().resuelto());
+                    break;
+                case '6': partida.deshacerMov();
                 System.out.println(partida);
                 break;
                 case '7':
-                partida = PartidaResuelta.partidaResuelta(partida.getPuzzle());
-                System.out.println(partida);
+                 if(partida.partidaResuelta())
+                  System.out.println(partida);
+                 else
+                 System.out.println("NO tiene solución");
                 opcion = '9';
                 break;
                 case '8':
-                partida = new Partida(leerPuzzle(contador), null);
+                partida = new Partida(leerPuzzle(contador));
                 contador++;
                 break;
                 case '9': break;
@@ -107,8 +92,10 @@ public class Pract1_B_Prueba
          */
         public static Puzzle leerPuzzle (int contador){
          Puzzle puzzle= new Puzzle();
+
           try{
-       BufferedReader lector= new BufferedReader(new FileReader("fichero.txt"));    
+       BufferedReader lector= new BufferedReader(new FileReader("fichero.txt"));
+
        for(int i=0;i< contador;i++)
        lector.readLine();
        String linea=lector.readLine();
@@ -122,7 +109,6 @@ public class Pract1_B_Prueba
     }
        catch (Exception e){// ver si manejarlo de otra forma
            System.out.println(e);
-           System.out.println("S�lo dispone de un puzzle gen�rico");
         }
            return puzzle;
     }
