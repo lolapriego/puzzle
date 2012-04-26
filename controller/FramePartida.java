@@ -3,6 +3,10 @@ package controller;
 
 import javax.swing.JFrame;
 import view.SlidePuzzleGUI;
+import java.util.Scanner;
+import model.Puzzle;
+import java.io.*;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -27,9 +31,16 @@ public class FramePartida extends javax.swing.JFrame {
      *
      */
 public static void main(String[] args) {
+       Scanner lector= new Scanner(System.in);
+       int contador=0;
+       Puzzle puzzle = leerPuzzle(contador);
+       contador++;
+
+
+
         JFrame window = new JFrame("Slide Puzzle");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setContentPane(new SlidePuzzleGUI());
+        window.setContentPane(new SlidePuzzleGUI(puzzle));
         window.pack();  // finalize layout
         window.show();  // make window visible
         window.setResizable(false);
@@ -64,4 +75,26 @@ public static void main(String[] args) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
  */
+     public static Puzzle leerPuzzle (int contador){
+         Puzzle puzzle= new Puzzle();
+
+          try{
+       BufferedReader lector= new BufferedReader(new FileReader("fichero.txt"));
+
+       for(int i=0;i< contador;i++)
+       lector.readLine();
+       String linea=lector.readLine();
+       System.out.println("La cadena le�da de fichero es: " + linea + "    \nlos �ltimos datos son considerados como las filas y columnas");
+       System.out.println("�sta genera el siguiente puzzle: ");
+       int aux=linea.length()-1;
+       puzzle = new Puzzle(linea.substring(0,aux-1),linea.charAt(aux-1)-'0',linea.charAt(aux)-'0');
+       System.out.println(puzzle.toString());
+       lector.close();
+
+    }
+       catch (Exception e){// ver si manejarlo de otra forma
+           System.out.println(e);
+        }
+           return puzzle;
+    }
 }

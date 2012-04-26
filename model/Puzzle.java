@@ -190,15 +190,7 @@ public class Puzzle
      */
     @Override
     public String toString(){
-        String devuelto='\n' + "" ;
-
-        for(int i=0; i<row; i++){
-            devuelto += '\n' + "----------------" +'\n';
-            for(int j=0;j<col; j++)
-                devuelto += " " + this.secuencia.charAt(i*col+j) + "|";
-        }
-
-        return devuelto;
+        return this.secuencia;
     }
      
     
