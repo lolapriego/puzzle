@@ -9,6 +9,7 @@ import model.Partida;
 import java.util.ArrayList;
 import java.util.Iterator;
 import model.Puzzle;
+import view.SlidePuzzleGUI;
 
 
 /**
@@ -21,6 +22,7 @@ import model.Puzzle;
     public class TicMetronomo implements MetronomoListener {
         private ArrayList<Puzzle> historia = new ArrayList<Puzzle>();
         private int contador;
+        private SlidePuzzleGUI gui;
     /**
      * Identificador del objeto.
      */
@@ -29,7 +31,8 @@ import model.Puzzle;
      *  Construye un objeto, el cual se identificara con un nombre dado.
      *  @param nombre String que identificara al objeto.
      */
-       public TicMetronomo(ArrayList<Puzzle> historia) {
+       public TicMetronomo(ArrayList<Puzzle> historia, SlidePuzzleGUI gui) {
+        this.gui = gui;
         this.historia = historia;
         this.contador = 0;
       }
@@ -41,7 +44,7 @@ import model.Puzzle;
      */
        public void tic(MetronomoEvent me) {
         if (contador < historia.size())
-            System.out.println(historia.get(contador));
+           gui.setPuzzle(historia.get(contador));
         contador++;
       }
    }

@@ -43,11 +43,14 @@ public class SlidePuzzleGUI extends JPanel {
             this.repaint();  // Show any updates to model.
         }//end mousePressed
 
-
+     public void setPuzzle(Puzzle p){
+         this.puzzle = p;
+         _puzzleGraphics.repaint();
+     }
+     
   public class NewGameAction implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try{
-            System.out.println("as>>>>>");
             puzzle = new Puzzle (" ABC", 2, 2);
             _puzzleGraphics.repaint();
             }

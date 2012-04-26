@@ -6,6 +6,9 @@ import view.SlidePuzzleGUI;
 import java.util.Scanner;
 import model.Puzzle;
 import java.io.*;
+import model.Metronomo;
+import controller.TicMetronomo;
+import model.Partida;
 
 
 /*
@@ -35,15 +38,19 @@ public static void main(String[] args) {
        int contador=0;
        Puzzle puzzle = leerPuzzle(contador);
        contador++;
-
-
+       Partida partida = new Partida(puzzle);
 
         JFrame window = new JFrame("Slide Puzzle");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setContentPane(new SlidePuzzleGUI(puzzle));
+        SlidePuzzleGUI gui = new SlidePuzzleGUI(puzzle);
+        window.setContentPane(gui);
         window.pack();  // finalize layout
         window.show();  // make window visible
         window.setResizable(false);
+
+        Metronomo m1 = new Metronomo (1);
+        if (partida.partidaResuelta())
+        m1.addMetronomoListener(new TicMetronomo(partida.getTraza(),gui));
     }//end main
     /** This method is called from within the constructor to
      * initialize the form.
@@ -97,4 +104,5 @@ public static void main(String[] args) {
         }
            return puzzle;
     }
+
 }
