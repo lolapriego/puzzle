@@ -15,6 +15,12 @@ import java.awt.event.*;
   public class StatusAction implements ActionListener {
       private int estado = 0;
       private int flag = 1;
+
+       /*
+       * actionPerformed acción que realiza al escuchar
+       *
+       * @params ActionEvent recibe el evento
+       */
         public void actionPerformed(ActionEvent e) {
             if (flag ==1){
             this.estado = 1;
@@ -25,6 +31,12 @@ import java.awt.event.*;
                 this.estado = 0;
                 }
         }
+
+               /*
+        * getEstado getter del estado
+        *
+        * @return int estado que marca el estado de la partida (Paused/play)
+        */
         public int getEstado(){
             return this.estado;
         }
