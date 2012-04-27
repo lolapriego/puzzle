@@ -7,8 +7,8 @@ import model.Puzzle;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
-import controller.NewGameAction;
-
+import controller.StatusAction;
+import controller.StartAction;
 
 
 
@@ -17,21 +17,27 @@ public class SlidePuzzleGUI extends JPanel {
 
     private GraphicsPanel    _puzzleGraphics;
     private Puzzle puzzle;
-    private NewGameAction nga;
+    private StatusAction nga;
+    private StartAction ngl;
     /** Creates new form NewJPanel */
 
-    public SlidePuzzleGUI(Puzzle p, NewGameAction gma) {
+    public SlidePuzzleGUI(Puzzle p, StatusAction gma, StartAction ngl) {
         this.puzzle = p;
         this.nga = gma;
+        this.ngl = ngl;
 
         //--- Create a button.  Add a listener to it.
-        JButton newGameButton = new JButton("Start");
-        newGameButton.addActionListener(this.nga);
+        JButton statusButton = new JButton("Play/Pause");
+        JButton newGame = new JButton("Reiniciar");
+        newGame.addActionListener(this.ngl);
+        statusButton.addActionListener(this.nga);
 
         //--- Create control panel
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout());
-        controlPanel.add(newGameButton);
+        controlPanel.add(statusButton);
+        controlPanel.add(newGame);
+
 
         //--- Create graphics panel
         _puzzleGraphics = new GraphicsPanel(p);
@@ -103,7 +109,7 @@ public class SlidePuzzleGUI extends JPanel {
 }//end GraphicGUI
 
 
-    ////////////////////////////////////////// inner class NewGameAction
+    ////////////////////////////////////////// inner class StatusAction
   
 
 }//end class SlidePuzzleGUI

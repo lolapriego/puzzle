@@ -1,12 +1,11 @@
 package controller;
 
-
+import model.Metronomo;
 import javax.swing.JFrame;
 import view.SlidePuzzleGUI;
 import java.util.Scanner;
 import model.Puzzle;
 import java.io.*;
-import model.Metronomo;
 import controller.TicMetronomo;
 import model.Partida;
 
@@ -44,19 +43,18 @@ public static void main(String[] args) {
 
         JFrame window = new JFrame("Slide Puzzle");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        NewGameAction listenerState = new NewGameAction();
+        StatusAction listenerState = new StatusAction();
+        StartAction ngl = new StartAction();
 
 
-        SlidePuzzleGUI gui = new SlidePuzzleGUI(puzzle, listenerState);
+        SlidePuzzleGUI gui = new SlidePuzzleGUI(puzzle, listenerState, ngl);
         window.setContentPane(gui);
         window.pack();  // finalize layout
         window.show();  // make window visible
         window.setResizable(false);
         Metronomo m1 = new Metronomo (1);
         if (partida.partidaResuelta())
-        m1.addMetronomoListener(new TicMetronomo(partida.getTraza(),gui, listenerState));
-        
-        m1.addMetronomoListener(new Ticc(estado, listenerState));
+        m1.addMetronomoListener(new TicMetronomo(partida.getTraza(),gui, listenerState, ngl));
     }//end main
     /** This method is called from within the constructor to
      * initialize the form.

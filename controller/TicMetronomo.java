@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import model.Puzzle;
 import view.SlidePuzzleGUI;
-import controller.NewGameAction;
+import controller.StatusAction;
+import controller.StartAction;
 
 
 /**
@@ -24,7 +25,8 @@ import controller.NewGameAction;
         private ArrayList<Puzzle> historia = new ArrayList<Puzzle>();
         private int contador;
         private SlidePuzzleGUI gui;
-        private NewGameAction nga;
+        private StatusAction nga;
+        private StartAction ngl;
     /**
      * Identificador del objeto.
      */
@@ -33,11 +35,12 @@ import controller.NewGameAction;
      *  Construye un objeto, el cual se identificara con un nombre dado.
      *  @param nombre String que identificara al objeto.
      */
-       public TicMetronomo(ArrayList<Puzzle> historia, SlidePuzzleGUI gui, NewGameAction nga) {
+       public TicMetronomo(ArrayList<Puzzle> historia, SlidePuzzleGUI gui, StatusAction nga, StartAction ngl) {
         this.gui = gui;
         this.historia = historia;
         this.contador = 0;
         this.nga = nga;
+        this.ngl = ngl;
       }
 
     /**
@@ -50,6 +53,11 @@ import controller.NewGameAction;
         if (contador < historia.size())
            gui.setPuzzle(historia.get(contador));
         contador++;
+        }
+        if (ngl.getEstado() == 2){
+            contador = 1;
+            gui.setPuzzle(historia.get(0));
+            ngl.setEstado(0);
         }
       }
    }
