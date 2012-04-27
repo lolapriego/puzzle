@@ -31,6 +31,16 @@ public class SlidePuzzleGUI extends JPanel {
     private TimerAction timer;
     /** Creates new form NewJPanel */
 
+      /**Construye la vista
+      * Constructor que nos permite mostrar un puzzle seg�n sus dimensiones y letras o n�meros
+      * Ademas nos permite manejar en interaccionar en la ejecución del programa
+      *
+      *
+      * @param Puzzle a dibujar
+      * @param StatusAction recibe el Listener que interacciona con el Controlador para poder pausar o reanudar la partida
+      * @param StartAction recibe el Listener que interacciona con el Controlador para poder reiniciar la partida
+      */
+
     public SlidePuzzleGUI(Puzzle p, StatusAction gma, StartAction ngl, TimerAction timer) {
         this.puzzle = p;
         this.nga = gma;
@@ -66,11 +76,22 @@ public class SlidePuzzleGUI extends JPanel {
         this.add(controlPanel, BorderLayout.NORTH);
         this.add(_puzzleGraphics, BorderLayout.CENTER);
     }//end constructor
-    
+
+   /*
+    * mousePressed
+    *
+    * @params MouseEvent permite interaccionar con el ratón
+    */
      public void mousePressed(MouseEvent e) {
             this.repaint();  // Show any updates to model.
         }//end mousePressed
 
+    /*
+     * setPuzzle Permite actualizar la vista según la decisión del controlador
+     * repinta el panel del Puzzle
+     *
+     * @param Puzzle que redibuja
+     */
      public void setPuzzle(Puzzle p){
          this.puzzle = p;
          _puzzleGraphics.repaint();
