@@ -1,10 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package controller;
 
+/**
+ * StatusAction.java
+ * Implementa el listener que reanudará o parará la partida en caso de llamarlo
+ *
+ * @author Mª Dolores priego Porcuna y Daniel Caballero Bellot
+ * https://github.com/lolapriego/puzzle
+ * @version 27/04/2012
+ */
 
 import java.awt.event.*;
 

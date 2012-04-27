@@ -86,23 +86,6 @@ public class Partida
         return flag;
     }
     
-    /**
-     * hashCode
-     * Redefine cuando dos partidas tienen el mismo hashCode
-     * 
-     * @return int hashCode calculado a partir del hashCode de cada puzzle sum�ndolos multiplicados por 3
-     */
-    @Override
-    public int hashCode(){
-      //  int hc=0;
-     //   if(padre!=null)
-      //  hc=3*hc +padre.hashCode();
-      //  if(puzzle!=null)
-      //  hc= 3*hc + puzzle.hashCode();
-      //  return hc;
-        return 1;
-    }
-    
     
     /**Borra la �ltima jugada de la partida
      * 

@@ -2,10 +2,8 @@ package view;
 
 
 import java.awt.*;
-import javax.swing.*;
 import model.Puzzle;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.event.*;
 import controller.StatusAction;
 import controller.StartAction;

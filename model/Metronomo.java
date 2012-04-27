@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package model;
 
@@ -14,7 +11,7 @@ import controller.MetronomoListener;
  *   eventos de tipo MetronomoEvent periodicamente.
  *   Cuando se crea esta clase puede indicarse en que instantes de tiempo
  *   se generaran los eventos.
- *   @author
+ *   @author TPRG
  */
     public class Metronomo extends Thread {
 

@@ -1,7 +1,3 @@
-/*
- * prueba para metronomo listener
- * imprimirá cada 60 ms una letra de una cadena
- */
 
 package controller;
 
@@ -17,9 +13,13 @@ import controller.StartAction;
 /**
  *   Clase que escucha los eventos generados por los metronomos y
  *   los pinta en pantalla.
- *   Esta clase define un atributo "nombre" que se usa para identificar
- *   a los diferentes objetos Echo que se creen.
- *   @author TPRG
+ *   Escucha los eventos generados por el metrónomo
+ * Realmente marca lo que se va ejecutando en cada momento en el programa según el estado que recibe de
+ * StatusAction y StartAction y redibuja el puzzle
+ *
+ *   @author Daniel Caballero Bellot y Mª Dolores Priego Porcuna
+ *   https://github.com/lolapriego/puzzle
+ *   @version 27/04/2012
  */
     public class TicMetronomo implements MetronomoListener {
         private ArrayList<Puzzle> historia = new ArrayList<Puzzle>();
@@ -27,14 +27,7 @@ import controller.StartAction;
         private SlidePuzzleGUI gui;
         private StatusAction nga;
         private StartAction ngl;
-    /**
-     * Identificador del objeto.
-     */
 
-    /**
-     *  Construye un objeto, el cual se identificara con un nombre dado.
-     *  @param nombre String que identificara al objeto.
-     */
        public TicMetronomo(ArrayList<Puzzle> historia, SlidePuzzleGUI gui, StatusAction nga, StartAction ngl) {
         this.gui = gui;
         this.historia = historia;

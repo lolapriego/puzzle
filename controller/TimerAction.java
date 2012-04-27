@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
 import javax.swing.JSlider;
@@ -10,9 +7,15 @@ import javax.swing.JLabel;
 import model.Metronomo;
 
 /**
+ * TimerAction.java
+ * Implementa el listener que seteará el tiempo del metrónomo en orden de décimas de segundo
+ * mediante el valor pasado por el Slider
  *
- * @author lolapriego
+ * @author Mª Dolores priego Porcuna y Daniel Caballero Bellot
+ * https://github.com/lolapriego/puzzle
+ * @version 27/04/2012
  */
+
 public class TimerAction implements ChangeListener {
   private int timer = 1;
   private JSlider slider;

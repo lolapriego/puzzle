@@ -8,7 +8,11 @@ package controller;
 
 /**
  *  Clase que define los eventos generados por los Metronomos.
+ *
+ * https://github.com/lolapriego/puzzle
  *  @author TPRG
+ * modified for Mª Dolores Priego Porcuna y Daniel Caballero Bellot
+ * @version X
  */
     public class MetronomoEvent {
 
