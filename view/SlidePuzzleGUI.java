@@ -11,6 +11,15 @@ import javax.swing.JSlider;
 import controller.TimerAction;
 
 
+/**
+ * SlidePuzzleGUI.java
+ * Implementa la vista de la aplicación. Dibuja el puzzle, y ofrece botones de parada reaunudación
+ * reinicio y tiempo; éste último válido antes de comenzar la partida
+ *
+ * @author Mª Dolores priego Porcuna y Daniel Caballero Bellot
+ * https://github.com/lolapriego/puzzle
+ * @version 27/04/2012
+ */
 
 
 public class SlidePuzzleGUI extends JPanel {
