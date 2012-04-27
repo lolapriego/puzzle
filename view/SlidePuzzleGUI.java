@@ -9,6 +9,8 @@ import javax.swing.event.*;
 import java.awt.event.*;
 import controller.StatusAction;
 import controller.StartAction;
+import javax.swing.JSlider;
+import controller.TimerAction;
 
 
 
@@ -19,12 +21,14 @@ public class SlidePuzzleGUI extends JPanel {
     private Puzzle puzzle;
     private StatusAction nga;
     private StartAction ngl;
+    private TimerAction timer;
     /** Creates new form NewJPanel */
 
-    public SlidePuzzleGUI(Puzzle p, StatusAction gma, StartAction ngl) {
+    public SlidePuzzleGUI(Puzzle p, StatusAction gma, StartAction ngl, TimerAction timer) {
         this.puzzle = p;
         this.nga = gma;
         this.ngl = ngl;
+        this.timer = timer;
 
         //--- Create a button.  Add a listener to it.
         JButton statusButton = new JButton("Play/Pause");
@@ -32,11 +36,19 @@ public class SlidePuzzleGUI extends JPanel {
         newGame.addActionListener(this.ngl);
         statusButton.addActionListener(this.nga);
 
+        JLabel label = new JLabel("10");
+        JSlider slider = new JSlider (JSlider.HORIZONTAL, 0, 10, 5);
+        timer.setTimerAtr(slider, label);
+        slider.addChangeListener(timer);
+
+
         //--- Create control panel
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new FlowLayout());
-        controlPanel.add(statusButton);
-        controlPanel.add(newGame);
+        controlPanel.add(statusButton, java.awt.BorderLayout.NORTH);
+        controlPanel.add(newGame, java.awt.BorderLayout.NORTH);
+        controlPanel.add(slider, java.awt.BorderLayout.CENTER);
+        controlPanel.add(label, java.awt.BorderLayout.SOUTH);
 
 
         //--- Create graphics panel
@@ -73,7 +85,7 @@ public class SlidePuzzleGUI extends JPanel {
             puzzle = p;
             _biggerFont = new Font("Helvetica", Font.BOLD, CELL_SIZE/4);
             this.setPreferredSize(new Dimension(CELL_SIZE * p.getCol(), CELL_SIZE*p.getRow()));
-            this.setBackground(Color.black);
+            this.setBackground(Color.white);
             this.addMouseListener(this);  // Listen own mouse events.
         }//end constructor
 
@@ -89,10 +101,10 @@ public class SlidePuzzleGUI extends JPanel {
                     char text = puzzle.toString().charAt(r * puzzle.getCol() + c);
                     if (true) {
                         g.setColor(new Color(51, 102, 255));
-                        g.fillRect(x+2, y+2, CELL_SIZE-4, CELL_SIZE-4);
+                        g.fillRect(x+70, y+2, CELL_SIZE-4, CELL_SIZE-4);
                         g.setColor(new Color(244, 244, 251));
                         g.setFont(_biggerFont);
-                        g.drawString("" + text, x+35, y-15+(3*CELL_SIZE)/4);
+                        g.drawString("" + text, x+105, y-15+(3*CELL_SIZE)/4);
                     }
                 }
             }

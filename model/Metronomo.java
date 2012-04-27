@@ -51,6 +51,11 @@ import controller.MetronomoListener;
          this(60);
       }
 
+       public void setPeriodo(int periodo){
+           this.periodo = periodo;
+           }
+       
+
 
     /**
      *   Cuerpo de ejecucion del thread.
@@ -65,6 +70,7 @@ import controller.MetronomoListener;
             while (true) {
                hora ++;
                long dormir = hora*periodo*1000 - (new Date()).getTime();
+               dormir = dormir /20;
                if (dormir > 0) Thread.sleep(dormir+50);
                avisar();
 

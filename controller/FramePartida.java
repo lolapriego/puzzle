@@ -6,8 +6,8 @@ import view.SlidePuzzleGUI;
 import java.util.Scanner;
 import model.Puzzle;
 import java.io.*;
-import controller.TicMetronomo;
 import model.Partida;
+import javax.swing.JSlider;
 
 
 
@@ -28,6 +28,7 @@ import model.Partida;
  */
 public class FramePartida extends javax.swing.JFrame {
    public static int estado;
+   public static double timer;
     /*public FramePartida() {
         initComponents();
     }
@@ -41,18 +42,19 @@ public static void main(String[] args) {
        Partida partida = new Partida(puzzle);
        estado = 0;
 
+
         JFrame window = new JFrame("Slide Puzzle");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         StatusAction listenerState = new StatusAction();
         StartAction ngl = new StartAction();
+        TimerAction timerAct = new TimerAction();
 
-
-        SlidePuzzleGUI gui = new SlidePuzzleGUI(puzzle, listenerState, ngl);
+        SlidePuzzleGUI gui = new SlidePuzzleGUI(puzzle, listenerState, ngl, timerAct);
         window.setContentPane(gui);
         window.pack();  // finalize layout
         window.show();  // make window visible
         window.setResizable(false);
-        Metronomo m1 = new Metronomo (1);
+        Metronomo m1 = new Metronomo (timerAct.getTimer());
         if (partida.partidaResuelta())
         m1.addMetronomoListener(new TicMetronomo(partida.getTraza(),gui, listenerState, ngl));
     }//end main
@@ -120,6 +122,7 @@ public static void main(String[] args) {
          Puzzle puzzle= new Puzzle();
 
           try{
+       puzzle = new Puzzle("1 2345",3, 2);
        BufferedReader lector= new BufferedReader(new FileReader("fichero.txt"));
 
        for(int i=0;i< contador;i++)
