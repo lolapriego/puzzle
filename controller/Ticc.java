@@ -1,8 +1,3 @@
-/*
- * prueba para metronomo listener
- * imprimirá cada 60 ms una letra de una cadena
- */
-
 package controller;
 
 import model.Partida;
@@ -20,11 +15,9 @@ import controller.NewGameAction;
  *   a los diferentes objetos Echo que se creen.
  *   @author TPRG
  */
-    public class TicMetronomo implements MetronomoListener {
-        private ArrayList<Puzzle> historia = new ArrayList<Puzzle>();
-        private int contador;
-        private SlidePuzzleGUI gui;
-        private NewGameAction nga;
+    public class Ticc implements MetronomoListener {
+        private int estado;
+        private NewGameAction gma;
     /**
      * Identificador del objeto.
      */
@@ -33,11 +26,9 @@ import controller.NewGameAction;
      *  Construye un objeto, el cual se identificara con un nombre dado.
      *  @param nombre String que identificara al objeto.
      */
-       public TicMetronomo(ArrayList<Puzzle> historia, SlidePuzzleGUI gui, NewGameAction nga) {
-        this.gui = gui;
-        this.historia = historia;
-        this.contador = 0;
-        this.nga = nga;
+       public Ticc(int estado, NewGameAction gma) {
+        this.estado = estado;
+        this.gma = gma;
       }
 
     /**
@@ -46,10 +37,8 @@ import controller.NewGameAction;
      *  @param El evento generado por el metronomo.
      */
        public void tic(MetronomoEvent me) {
-        if (nga.getEstado() == 1){
-        if (contador < historia.size())
-           gui.setPuzzle(historia.get(contador));
-        contador++;
-        }
+
+        System.out.println(estado);
+        estado = gma.getEstado();
       }
    }

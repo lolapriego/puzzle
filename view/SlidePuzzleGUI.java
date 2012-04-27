@@ -7,6 +7,7 @@ import model.Puzzle;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
+import controller.NewGameAction;
 
 
 
@@ -16,14 +17,16 @@ public class SlidePuzzleGUI extends JPanel {
 
     private GraphicsPanel    _puzzleGraphics;
     private Puzzle puzzle;
-
+    private NewGameAction nga;
     /** Creates new form NewJPanel */
-    public SlidePuzzleGUI(Puzzle p) {
+
+    public SlidePuzzleGUI(Puzzle p, NewGameAction gma) {
         this.puzzle = p;
+        this.nga = gma;
 
         //--- Create a button.  Add a listener to it.
-        JButton newGameButton = new JButton("New Game");
-        newGameButton.addActionListener(new NewGameAction());
+        JButton newGameButton = new JButton("Start");
+        newGameButton.addActionListener(this.nga);
 
         //--- Create control panel
         JPanel controlPanel = new JPanel();
@@ -47,19 +50,9 @@ public class SlidePuzzleGUI extends JPanel {
          this.puzzle = p;
          _puzzleGraphics.repaint();
      }
-     
-  public class NewGameAction implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            try{
-            puzzle = new Puzzle (" ABC", 2, 2);
-            _puzzleGraphics.repaint();
-            }
-            catch (Exception exc){
-            }
-        }
 
 
-    }
+    
     //////////////////////////////////////////////// class GraphicsPanel
     // This is defined inside the outer class so that
     // it can use the outer class instance variables.
